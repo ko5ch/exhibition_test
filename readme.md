@@ -41,8 +41,10 @@ run migration:
 ```
 php artisan migrate
 ```
-
-
+process  front 
+```
+npm run dev
+```
 generate application key:
 ```
 php artisan key:generate
