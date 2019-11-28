@@ -2,34 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\UserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use App\User;
 
 class AuthController extends Controller
 {
     /**
-     * @param Request $request
+     * @param UserRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function register(Request $request)
+    public function register(UserRequest $request)
     {
-        $v = Validator::make($request->all(), [
-            'email' => 'required|email|unique:users',
-            'password'  => 'required|min:3|confirmed',
-        ]);
-        if ($v->fails())
-        {
-            return response()->json([
-                'status' => 'error',
-                'errors' => $v->errors()
-            ], 422);
-        }
         $user = new User;
-        $user->email = $request->email;
+        $user->email    = $request->email;
         $user->password = bcrypt($request->password);
         $user->save();
+
         return response()->json(['status' => 'success'], 200);
     }
 
@@ -43,6 +33,7 @@ class AuthController extends Controller
         if ($token = $this->guard()->attempt($credentials)) {
             return response()->json(['status' => 'success'], 200)->header('Authorization', $token);
         }
+
         return response()->json(['error' => 'login_error'], 401);
     }
 
@@ -52,6 +43,7 @@ class AuthController extends Controller
     public function logout()
     {
         $this->guard()->logout();
+
         return response()->json([
             'status' => 'success',
             'msg' => 'Logged out Successfully.'
@@ -65,6 +57,7 @@ class AuthController extends Controller
     public function user(Request $request)
     {
         $user = User::find(Auth::user()->id);
+
         return response()->json([
             'status' => 'success',
             'data' => $user
@@ -81,6 +74,7 @@ class AuthController extends Controller
                 ->json(['status' => 'successs'], 200)
                 ->header('Authorization', $token);
         }
+
         return response()->json(['error' => 'refresh_token_error'], 401);
     }
 

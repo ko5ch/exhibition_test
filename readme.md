@@ -33,7 +33,10 @@ install deps in container:
 ```
 composer install
 ```
-
+install front from project folder:
+```
+npm i
+```
 run migration:
 ```
 php artisan migrate
@@ -43,6 +46,7 @@ php artisan migrate
 generate application key:
 ```
 php artisan key:generate
+php artisan jwt:secret
 ```
 
 ## DONE!
