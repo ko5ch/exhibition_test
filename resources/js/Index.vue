@@ -17,17 +17,17 @@
                 <nav class="col-md-2 d-none d-md-block bg-light sidebar">
                     <div class="sidebar-sticky">
                         <ul class="nav flex-column">
-                            <li class="nav-item">
+                            <li class="nav-item" :class="{active: isActive('register')}">
                                     <span data-feather="home"></span>
                                     <router-link class="nav-link" :to="{name: 'register'}">
                                         Регистрация <span class="sr-only">(current)</span>
                                     </router-link>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" :class="{active: isActive('projects')}">
                                     <span data-feather="shopping-cart"></span>
-                                    <router-link class="nav-link active" :to="{name:'projects'}">Проекты</router-link>
+                                    <router-link class="nav-link" :to="{name:'projects'}">Проекты</router-link>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" :class="{active: isActive('imported')}">
                                 <span data-feather="shopping-cart"></span>
                                 <router-link class="nav-link" :to="{name:'imported'}">Импортированные Проекты</router-link>
                             </li>
@@ -51,8 +51,24 @@
                 //
             }
         },
-        components: {
-            //
+        computed: {
+            currentRouteName() {
+                return this.$route.name;
+            }
+        },
+        methods: {
+            isActive(value) {
+                return this.currentRouteName === value;
+            }
         }
     }
 </script>
+<style>
+    li:active {
+    background-color: #eee;
+    }
+
+    li.active {
+    background-color: #eee;
+    }
+</style>
