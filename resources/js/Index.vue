@@ -23,13 +23,13 @@
                                         Регистрация <span class="sr-only">(current)</span>
                                     </router-link>
                             </li>
-                            <li class="nav-item active">
+                            <li class="nav-item">
                                     <span data-feather="shopping-cart"></span>
                                     <router-link class="nav-link active" :to="{name:'projects'}">Проекты</router-link>
                             </li>
-                            <li class="nav-item active">
+                            <li class="nav-item">
                                 <span data-feather="shopping-cart"></span>
-                                <router-link class="nav-link active" :to="{name:'imported'}">Импортированные Проекты</router-link>
+                                <router-link class="nav-link" :to="{name:'imported'}">Импортированные Проекты</router-link>
                             </li>
                         </ul>
                     </div>
